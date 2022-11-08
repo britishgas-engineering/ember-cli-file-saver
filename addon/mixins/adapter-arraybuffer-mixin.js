@@ -1,7 +1,6 @@
-import Ember from 'ember';
+import Mixin from '@ember/object/mixin';
 
-export default Ember.Mixin.create({
-
+export default Mixin.create({
   /**
    * Because dataType:json is hardcoded we are looking
    * for either a blob:true or arraybuffer:true ajax option
@@ -24,6 +23,5 @@ export default Ember.Mixin.create({
       }
     }
     return opts;
-  }
-
+  },
 });
