@@ -1,8 +1,7 @@
-import Ember from 'ember';
+import Mixin from '@ember/object/mixin';
 import FileSaver from 'file-saver';
 
-export default Ember.Mixin.create({
-
+export default Mixin.create({
   saveCanvasAs(filename, canvas) {
     canvas.toBlob((blob) => this.saveAs(blob, filename));
   },
@@ -12,11 +11,10 @@ export default Ember.Mixin.create({
   },
 
   saveFileAs(filename, content, contentType) {
-    this.saveAs(new Blob([ content ], { type: contentType }), filename);
+    this.saveAs(new Blob([content], { type: contentType }), filename);
   },
 
   saveAs() {
     FileSaver.saveAs(...arguments);
-  }
-
+  },
 });

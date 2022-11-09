@@ -1,11 +1,9 @@
-/* eslint-env node */
 'use strict';
 
 var path = require('path');
 var Funnel = require('broccoli-funnel');
 var MergeTrees = require('broccoli-merge-trees');
 var map = require('broccoli-stew').map;
-
 
 module.exports = {
   name: 'ember-cli-file-saver',
@@ -14,18 +12,18 @@ module.exports = {
     this._super.included.apply(this, arguments);
 
     this.import('vendor/FileSaver.js', {
-      type: 'vendor'
+      type: 'vendor',
     });
 
     this.import('vendor/jquery-ajax-arraybuffer.js', {
-      type: 'vendor'
+      type: 'vendor',
     });
 
     this.import('vendor/file-saver.shim.js', {
       type: 'vendor',
       exports: {
-        rison: ['default']
-      }
+        rison: ['default'],
+      },
     });
   },
 
@@ -33,10 +31,13 @@ module.exports = {
     var trees = [];
     var fileSaverPath = path.dirname(require.resolve('file-saver'));
     var fileSaverTree = new Funnel(fileSaverPath, {
-      files: ['FileSaver.js']
+      files: ['FileSaver.js'],
     });
 
-    fileSaverTree = map(fileSaverTree, (content) => `if (typeof FastBoot === 'undefined') { ${content} }`);
+    fileSaverTree = map(
+      fileSaverTree,
+      (content) => `if (typeof FastBoot === 'undefined') { ${content} }`
+    );
 
     if (vendorTree !== undefined) {
       trees.push(vendorTree);
